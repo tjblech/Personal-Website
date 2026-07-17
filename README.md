@@ -40,7 +40,7 @@
         <p>Computer Science at Northeastern. Engineer, product-minded builder, and future founder obsessed with turning difficult ideas into polished, useful products.</p>
         <div class="hero-actions">
           <a class="button primary" href="#work">Explore my work <span>↓</span></a>
-          <a class="button ghost" href="assets/TJ-Blechman-Resume.pdf">Résumé <span>↗</span></a>
+          <a class="button ghost" href="#contact">Contact me <span>↗</span></a>
         </div>
       </div>
       <div class="hero-orbit" aria-hidden="true">
@@ -184,7 +184,7 @@ auto future = TJ.build();</code></pre>
         <span>HAVE A HARD PROBLEM?</span>
         <h2>Let’s build<br /><em>something remarkable.</em></h2>
         <a class="contact-email" href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com <b>↗</b></a>
-        <div class="contact-links"><a href="#">GitHub ↗</a><a href="#">LinkedIn ↗</a><a href="assets/TJ-Blechman-Resume.pdf">Résumé ↗</a></div>
+        <div class="contact-links"><a href="#">GitHub ↗</a><a href="#">LinkedIn ↗</a></div>
       </div>
     </section>
   </main>
