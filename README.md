@@ -1,36 +1,64 @@
 # TJ Blechman Portfolio
 
-A fully static personal portfolio built for GitHub Pages.
+A modern personal portfolio website showcasing my work as a Computer Science student, software engineer, and aspiring founder.
 
-## Publish on GitHub Pages
+Designed to emphasize polished UI/UX, interactive experiences, and thoughtful engineering rather than a traditional résumé-style portfolio.
 
-1. Create a new public GitHub repository.
-2. Upload **all files in this folder** to the repository root.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, select **Deploy from a branch**.
-5. Select `main` and `/ (root)`, then save.
+---
 
-There is no install command, package manager, build step, framework, or dependency.
+## Features
 
-## Preview locally
+- Responsive single-page portfolio
+- Animated hero section
+- Interactive project showcase
+- Developer terminal interface (TJ_OS)
+- Professional timeline
+- Responsive mobile navigation
+- Dark theme
+- Lightweight, dependency-free implementation
 
-Double-click `index.html`.
+---
 
-## Included
+## Tech Stack
 
-- Responsive cinematic homepage
-- Three detailed project showcases
-- Interactive terminal
-- Animated canvas background
-- Mobile navigation
-- Print-ready web résumé
-- Custom 404 page
-- Favicon and manifest
-- Reduced-motion accessibility support
+- HTML5
+- CSS3
+- Vanilla JavaScript
 
-## Main files
+No external frameworks or build tools are required.
 
-- `index.html` — portfolio
-- `styles.css` — all visual styling
-- `script.js` — interactions and animation
-- `resume.html` — printable résumé
+---
+
+## Project Structure
+
+```
+/
+├── index.html
+├── style.css
+├── script.js
+├── assets/
+├── favicon.ico
+└── README.md
+```
+
+---
+
+## Philosophy
+
+This portfolio was built with three goals:
+
+- Create an engaging first impression.
+- Highlight engineering projects through storytelling.
+- Keep the site lightweight, fast, and easily deployable.
+
+---
+
+## Live Website
+
+Coming soon.
+
+---
+
+## License
+
+This project is released under the MIT License.
