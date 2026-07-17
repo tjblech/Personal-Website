@@ -1,0 +1,50 @@
+const progress = document.querySelector('.progress span');
+const glow = document.querySelector('.cursor-glow');
+const reveals = document.querySelectorAll('.reveal');
+const year = document.getElementById('year');
+year.textContent = new Date().getFullYear();
+
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.width = `${max ? (scrollY / max) * 100 : 0}%`;
+});
+
+window.addEventListener('pointermove', e => {
+  glow.style.left = `${e.clientX}px`;
+  glow.style.top = `${e.clientY}px`;
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: .12 });
+reveals.forEach(el => observer.observe(el));
+
+const output = document.getElementById('terminal-output');
+const form = document.getElementById('terminal-form');
+const input = document.getElementById('terminal-input');
+const commands = {
+  help: ['Available commands:', 'about · skills · projects · currently · contact · clear'],
+  about: ['TJ Blechman — computer science student, engineer, builder, and future founder.', 'I care about hard problems, thoughtful products, and actually shipping.'],
+  skills: ['C++ · Java · Python · TypeScript · HTML/CSS · Git', 'Software engineering · embedded systems · product design · rapid learning'],
+  projects: ['01 — Jack Cadman campaign website', '02 — Custom electric bike system', '03 — Engineering experiments'],
+  currently: ['Studying: Computer Science @ Northeastern', 'Building: this portfolio + engineering projects', 'Thinking about: startups, biotech, and products that should exist'],
+  contact: ['Email: YOUR_EMAIL@example.com', 'GitHub: replace this link', 'LinkedIn: replace this link']
+};
+function print(command) {
+  const line = document.createElement('p');
+  line.innerHTML = `<span class="success">tj@portfolio:~$</span> ${command}`;
+  output.appendChild(line);
+  if (command === 'clear') { output.innerHTML = ''; return; }
+  const response = commands[command];
+  if (!response) {
+    const p = document.createElement('p'); p.className='error'; p.textContent=`Command not found: ${command}. Type help.`; output.appendChild(p);
+  } else response.forEach(text => { const p=document.createElement('p'); p.textContent=text; output.appendChild(p); });
+  output.scrollTop = output.scrollHeight;
+}
+form.addEventListener('submit', e => { e.preventDefault(); const value=input.value.trim().toLowerCase(); if(value) print(value); input.value=''; });
+document.querySelectorAll('[data-command]').forEach(btn => btn.addEventListener('click', () => { print(btn.dataset.command); input.focus(); }));
