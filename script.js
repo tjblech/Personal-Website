@@ -1,303 +1,338 @@
-(() => {
-  'use strict';
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="TJ Blechman builds thoughtful software, product systems, and hardware prototypes." />
+  <meta name="theme-color" content="#0b0c0b" />
+  <meta property="og:title" content="TJ Blechman — Engineering Ideas Into Reality" />
+  <meta property="og:description" content="Selected work by TJ Blechman: software, product systems, and hardware prototypes." />
+  <meta property="og:type" content="website" />
+  <title>TJ Blechman — Engineering Ideas Into Reality</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const body = document.body;
-  const header = document.querySelector('.site-header');
-  const progressBar = document.querySelector('.scroll-progress span');
-  const boot = document.getElementById('boot');
-  const year = document.getElementById('year');
-  const menuButton = document.getElementById('menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const signalToggle = document.getElementById('signal-toggle');
-  const devOverlay = document.getElementById('dev-overlay');
-  const viewportReadout = document.getElementById('viewport-readout');
-  const scrollReadout = document.getElementById('scroll-readout');
-  const signalReadout = document.getElementById('signal-readout');
+  <header class="site-header" id="top">
+    <a class="brand" href="#top" aria-label="TJ Blechman, home">
+      <span class="brand-mark" aria-hidden="true">TJ</span>
+      <span class="brand-name">TJ BLECHMAN</span>
+    </a>
 
-  if (year) year.textContent = new Date().getFullYear();
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#work">Work</a>
+      <a href="#workbench">Workbench</a>
+      <a href="#about">About</a>
+      <a href="resume.html">Résumé</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-  const hideBoot = () => {
-    if (!boot) return;
-    window.setTimeout(() => boot.classList.add('is-hidden'), reduceMotion ? 0 : 900);
-  };
-  if (document.readyState === 'complete') hideBoot();
-  else window.addEventListener('load', hideBoot, { once: true });
-  window.setTimeout(hideBoot, 2300);
+    <a class="header-cta" href="mailto:tjblech@gmail.com">Get in touch</a>
 
-  const updateScroll = () => {
-    const y = window.scrollY || document.documentElement.scrollTop;
-    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    const percent = Math.min(100, Math.max(0, (y / max) * 100));
-    if (progressBar) progressBar.style.width = `${percent}%`;
-    if (header) header.classList.toggle('is-scrolled', y > 24);
-    if (scrollReadout) scrollReadout.textContent = `${Math.round(percent)}%`;
-  };
-  updateScroll();
-  window.addEventListener('scroll', updateScroll, { passive: true });
+    <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span>
+    </button>
+  </header>
 
-  const reveals = document.querySelectorAll('.reveal, .reveal-text, .timeline');
-  if ('IntersectionObserver' in window && !reduceMotion) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
-    reveals.forEach((el) => observer.observe(el));
-  } else {
-    reveals.forEach((el) => el.classList.add('is-visible'));
-  }
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <a href="#work">Selected work</a>
+      <a href="#workbench">Workbench</a>
+      <a href="#about">About</a>
+      <a href="resume.html">Résumé</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="mobile-menu-meta">
+      <span>Boston / Rhode Island</span>
+      <a href="mailto:tjblech@gmail.com">tjblech@gmail.com</a>
+    </div>
+  </div>
 
-  const counters = document.querySelectorAll('[data-count]');
-  if ('IntersectionObserver' in window) {
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = Number(el.dataset.count || 0);
-        const hasDecimals = String(el.dataset.count).includes('.');
-        const duration = reduceMotion ? 1 : 1100;
-        const start = performance.now();
-        const tick = (now) => {
-          const t = Math.min(1, (now - start) / duration);
-          const eased = 1 - Math.pow(1 - t, 3);
-          const current = target * eased;
-          el.textContent = hasDecimals ? current.toFixed(2) : Math.round(current).toString();
-          if (t < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-        counterObserver.unobserve(el);
-      });
-    }, { threshold: 0.6 });
-    counters.forEach((el) => counterObserver.observe(el));
-  }
+  <main id="main">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <p class="eyebrow status-green">Software. Hardware. Prototypes.</p>
+        <h1 id="hero-title">
+          <span>Engineering</span>
+          <span>ideas into</span>
+          <span class="copper-text">reality.</span>
+        </h1>
+        <p class="hero-summary">I’m TJ Blechman, an incoming Northeastern Computer Science student with an engineering foundation. I build useful software, thoughtful interfaces, and physical systems that solve real problems.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">View my work <span aria-hidden="true">→</span></a>
+          <a class="button button-secondary" href="resume.html"><span aria-hidden="true">↓</span> Open résumé</a>
+        </div>
+      </div>
 
-  const setMenu = (open) => {
-    if (!menuButton || !mobileMenu) return;
-    menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    mobileMenu.classList.toggle('is-open', open);
-    mobileMenu.setAttribute('aria-hidden', String(!open));
-    body.classList.toggle('menu-open', open);
-  };
-  menuButton?.addEventListener('click', () => {
-    setMenu(menuButton.getAttribute('aria-expanded') !== 'true');
-  });
-  mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') setMenu(false);
-  });
+      <div class="hero-graphic reveal" aria-hidden="true">
+        <svg class="hero-trace" viewBox="0 0 430 310" role="img">
+          <path class="trace-ghost" d="M20 265H92l31-31v-91l36-36h78l31-31h140" />
+          <path class="trace-live" d="M20 265H92l31-31v-91l36-36h78l31-31h140" />
+          <circle cx="92" cy="265" r="7" />
+          <circle cx="123" cy="234" r="5" />
+          <circle cx="268" cy="76" r="5" />
+        </svg>
+      </div>
 
-  let signalMode = false;
-  const setSignalMode = (enabled) => {
-    signalMode = enabled;
-    body.classList.toggle('signal-mode', enabled);
-    signalToggle?.setAttribute('aria-pressed', String(enabled));
-    if (signalReadout) signalReadout.textContent = enabled ? 'BOOST' : 'NORMAL';
-  };
-  signalToggle?.addEventListener('click', () => setSignalMode(!signalMode));
+      <aside class="status-panel reveal" aria-label="Current status">
+        <div class="panel-title">/STATUS</div>
+        <dl>
+          <div>
+            <dt>Current focus</dt>
+            <dd>Portfolio v2.0 <span class="status-badge status-live">In progress</span></dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>Boston, MA <span class="status-badge status-live">Local</span></dd>
+          </div>
+          <div>
+            <dt>Availability</dt>
+            <dd>Open to opportunities <span class="status-badge status-live">Available</span></dd>
+          </div>
+          <div>
+            <dt>GitHub</dt>
+            <dd><a href="https://github.com/tjblech" target="_blank" rel="noreferrer">github.com/tjblech</a></dd>
+          </div>
+        </dl>
+        <div class="panel-terminal"><span>tj@workbench:~$</span><i></i></div>
+      </aside>
+    </section>
 
-  let devOpen = false;
-  document.addEventListener('keydown', (event) => {
-    const tag = document.activeElement?.tagName;
-    if (event.key.toLowerCase() === 't' && tag !== 'INPUT' && tag !== 'TEXTAREA') {
-      devOpen = !devOpen;
-      devOverlay?.classList.toggle('is-open', devOpen);
-      devOverlay?.setAttribute('aria-hidden', String(!devOpen));
-    }
-  });
-  const updateViewport = () => {
-    if (viewportReadout) viewportReadout.textContent = `${window.innerWidth}×${window.innerHeight}`;
-  };
-  updateViewport();
-  window.addEventListener('resize', updateViewport, { passive: true });
+    <section class="selected-work shell section-rule" id="work" aria-labelledby="work-title">
+      <div class="section-intro reveal">
+        <p class="section-label">// Selected work</p>
+        <a class="section-link" href="https://github.com/tjblech" target="_blank" rel="noreferrer">View GitHub <span>→</span></a>
+      </div>
 
-  if (finePointer) {
-    const cursor = document.querySelector('.cursor-orbit');
-    let mouseX = -100;
-    let mouseY = -100;
-    let cursorX = -100;
-    let cursorY = -100;
-    document.addEventListener('mousemove', (event) => {
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-      if (cursor) cursor.style.opacity = '1';
-    }, { passive: true });
-    const animateCursor = () => {
-      cursorX += (mouseX - cursorX) * 0.18;
-      cursorY += (mouseY - cursorY) * 0.18;
-      if (cursor) cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-      requestAnimationFrame(animateCursor);
-    };
-    requestAnimationFrame(animateCursor);
+      <h2 id="work-title" class="sr-only">Selected work</h2>
 
-    document.querySelectorAll('a, button, input, .project__visual').forEach((el) => {
-      el.addEventListener('mouseenter', () => cursor?.classList.add('is-active'));
-      el.addEventListener('mouseleave', () => cursor?.classList.remove('is-active'));
-    });
+      <div class="project-grid">
+        <article class="project-card project-card-featured reveal">
+          <div class="project-visual campaign-visual">
+            <img src="assets/jack-cadman-home.png" alt="Homepage of the Jack Cadman campaign website" />
+            <div class="project-schematic" aria-hidden="true">
+              <svg viewBox="0 0 600 260" preserveAspectRatio="none">
+                <path d="M30 220h84l28-28h76l28-28h140l32-32h150" />
+                <circle cx="114" cy="220" r="5" />
+                <circle cx="246" cy="164" r="5" />
+                <circle cx="398" cy="132" r="5" />
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-heading">
+              <div>
+                <h3>Jack Cadman Campaign Website</h3>
+                <p>Designer &amp; developer</p>
+              </div>
+              <span class="status-badge status-live">Live</span>
+            </div>
+            <p class="project-description">A clear, accessible public-facing website built for a real local campaign—from visual direction and content hierarchy through deployment.</p>
+            <div class="case-study-grid">
+              <div><span>Problem</span><p>A local campaign needed a credible online presence before launch.</p></div>
+              <div><span>Approach</span><p>Designed and developed a fast, responsive site centered on clarity and trust.</p></div>
+              <div><span>Stack</span><p>Jekyll · HTML/CSS · GitHub Pages · Cloudflare</p></div>
+              <div><span>Outcome</span><p>Deployed live and used as the campaign’s primary web presence.</p></div>
+            </div>
+            <a class="project-link" href="https://jacklcadman.com/" target="_blank" rel="noreferrer">Visit live project <span>→</span></a>
+          </div>
+        </article>
 
-    if (!reduceMotion) {
-      document.querySelectorAll('.magnetic').forEach((el) => {
-        el.addEventListener('mousemove', (event) => {
-          const rect = el.getBoundingClientRect();
-          const x = event.clientX - rect.left - rect.width / 2;
-          const y = event.clientY - rect.top - rect.height / 2;
-          el.style.transform = `translate(${x * 0.08}px, ${y * 0.1}px)`;
-        });
-        el.addEventListener('mouseleave', () => {
-          el.style.transform = '';
-        });
-      });
+        <article class="project-card reveal">
+          <div class="project-visual dashboard-visual" aria-label="Schematic interface preview for the billiards tournament manager">
+            <div class="dashboard-shell" aria-hidden="true">
+              <div class="dash-sidebar"><b>TB</b><i></i><i></i><i></i><i></i></div>
+              <div class="dash-main">
+                <div class="dash-top"><span>Friday Night 8-Ball</span><em>Live</em></div>
+                <div class="dash-stats"><span>8 players</span><span>2 tables</span><span>4 rounds</span></div>
+                <div class="dash-table">
+                  <div><b>Table 1</b><span>Jordan vs Maya</span><em>In play</em></div>
+                  <div><b>Next</b><span>Chris vs Alex</span><em>Ready</em></div>
+                  <div><b>On deck</b><span>Sam vs Eli</span><em>08:42</em></div>
+                  <div><b>Bracket</b><span>Round 2</span><em>Active</em></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-schematic" aria-hidden="true">
+              <svg viewBox="0 0 600 260" preserveAspectRatio="none">
+                <path d="M40 205h75l34-34h96l26-26h105l31-31h150" />
+                <circle cx="115" cy="205" r="5" />
+                <circle cx="271" cy="145" r="5" />
+                <circle cx="407" cy="114" r="5" />
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-heading">
+              <div><h3>Billiards Tournament Manager</h3><p>Product design &amp; development</p></div>
+              <span class="status-badge status-progress">In development</span>
+            </div>
+            <p class="project-description">A tournament-management tool designed around actual event flow: live brackets, two-table queues, organizer controls, public views, and persistent state.</p>
+            <div class="case-study-grid">
+              <div><span>Problem</span><p>Manual tracking was fragmented, slow, and easy to lose.</p></div>
+              <div><span>Approach</span><p>Model the real workflow first, then build the interface around it.</p></div>
+              <div><span>Focus</span><p>State · Scheduling · Mobile usability</p></div>
+              <div><span>Status</span><p>Core product and interaction model in active development.</p></div>
+            </div>
+            <a class="project-link" href="https://github.com/tjblech" target="_blank" rel="noreferrer">View development work <span>→</span></a>
+          </div>
+        </article>
 
-      document.querySelectorAll('.project__visual').forEach((visual) => {
-        visual.addEventListener('mousemove', (event) => {
-          const rect = visual.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width - 0.5;
-          const y = (event.clientY - rect.top) / rect.height - 0.5;
-          const frame = visual.querySelector('.browser-frame, .dashboard-mock, .common-mock');
-          if (frame) frame.style.transform = `perspective(1400px) rotateX(${-y * 3}deg) rotateY(${x * 4}deg) translate3d(${x * 4}px, ${y * 4}px, 0)`;
-        });
-        visual.addEventListener('mouseleave', () => {
-          const frame = visual.querySelector('.browser-frame, .dashboard-mock, .common-mock');
-          if (frame) frame.style.transform = '';
-        });
-      });
-    }
-  }
+        <article class="project-card reveal">
+          <div class="project-visual bike-visual" aria-label="Technical illustration of the electric bicycle project">
+            <svg class="bike-blueprint" viewBox="0 0 700 380" role="img" aria-label="Electric bicycle schematic">
+              <g class="grid-lines">
+                <path d="M0 70H700M0 140H700M0 210H700M0 280H700M100 0V380M200 0V380M300 0V380M400 0V380M500 0V380M600 0V380" />
+              </g>
+              <g class="bike-lines">
+                <circle cx="180" cy="265" r="93" /><circle cx="530" cy="265" r="93" />
+                <path d="M180 265l115-8 86-117 149 125M295 257l86-117 62 123H295l-52-126h-58M381 140l-32-52h71M443 263l50-151h58M490 112h96M180 265l63-128" />
+                <rect x="302" y="183" width="95" height="58" rx="7" />
+                <path d="M313 196h73M313 208h73M313 220h73" />
+              </g>
+              <g class="bike-labels">
+                <path d="M343 176V88h-58" /><text x="180" y="82">52V BATTERY PACKAGE</text>
+                <path d="M535 160h93" /><text x="548" y="151">HUB MOTOR</text>
+                <path d="M205 180H92" /><text x="25" y="170">FRAME FIT</text>
+              </g>
+            </svg>
+            <div class="project-schematic" aria-hidden="true">
+              <svg viewBox="0 0 600 260" preserveAspectRatio="none">
+                <path d="M40 205h75l34-34h96l26-26h105l31-31h150" />
+                <circle cx="115" cy="205" r="5" />
+                <circle cx="271" cy="145" r="5" />
+                <circle cx="407" cy="114" r="5" />
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-heading">
+              <div><h3>Custom Electric Bicycle</h3><p>Hardware system design</p></div>
+              <span class="status-badge status-progress">Prototype</span>
+            </div>
+            <p class="project-description">A ground-up e-bike project exploring performance targets, electrical architecture, battery packaging, waterproofing, and future telemetry.</p>
+            <div class="case-study-grid">
+              <div><span>Problem</span><p>Balance speed, range, reliability, weight, and safe packaging.</p></div>
+              <div><span>Approach</span><p>Define constraints first, then evaluate each subsystem as part of one platform.</p></div>
+              <div><span>Architecture</span><p>52V system · 20–25Ah target · custom enclosure</p></div>
+              <div><span>Status</span><p>Component research and system planning in progress.</p></div>
+            </div>
+            <a class="project-link" href="#workbench">Open the workbench <span>→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  const form = document.getElementById('terminal-form');
-  const input = document.getElementById('terminal-input');
-  const history = document.getElementById('terminal-history');
-  const commandButtons = document.querySelectorAll('[data-command]');
+    <section class="workbench shell section-rule" id="workbench" aria-labelledby="workbench-title">
+      <div class="workbench-heading reveal">
+        <div>
+          <p class="section-label">// Workbench</p>
+          <h2 id="workbench-title">Current builds and experiments.</h2>
+          <p>Ideas become prototypes. Prototypes become systems.</p>
+        </div>
+        <button class="button button-secondary terminal-toggle" type="button" aria-expanded="true" aria-controls="terminal">Toggle terminal <span aria-hidden="true">&gt;_</span></button>
+      </div>
 
-  const terminalCommands = {
-    help: 'Commands: about · projects · stack · now · contact · resume · clear',
-    about: 'TJ is an incoming Northeastern CS student with a computer engineering foundation and a focus on product engineering, startups, and ambitious technical work.',
-    projects: '01 Campaign platform  |  02 Billiards tournament system  |  03 Common Ground resource platform',
-    stack: 'C++ · JavaScript · TypeScript · React · HTML/CSS · Git · Supabase · MATLAB · Cloudflare',
-    now: 'Building this portfolio, refining client work, and exploring a custom 52V electric-bike platform.',
-    contact: 'Email: tjblech@gmail.com  |  GitHub: github.com/tjblech',
-    resume: 'Opening résumé…'
-  };
+      <div class="bench-layout">
+        <div class="bench-cards reveal">
+          <article class="bench-card">
+            <div class="bench-art circuit-art" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+            <h3>Electric bike architecture</h3>
+            <p>Battery placement, controller selection, enclosure design, and system tradeoffs.</p>
+            <span>Hardware</span>
+          </article>
+          <article class="bench-card">
+            <div class="bench-art ui-art" aria-hidden="true"><div></div><div></div><div></div></div>
+            <h3>Portfolio v2</h3>
+            <p>A complete visual-system rebuild focused on clarity, credibility, and restraint.</p>
+            <span>Product design</span>
+          </article>
+          <article class="bench-card">
+            <div class="bench-art waveform-art" aria-hidden="true"><svg viewBox="0 0 300 120"><path d="M0 62h35l15-31 28 69 25-52 22 14h31l19-43 31 81 24-54 19 16h71" /></svg></div>
+            <h3>Tournament logic</h3>
+            <p>Translating messy real-world event operations into reliable product state.</p>
+            <span>Software</span>
+          </article>
+          <article class="bench-card">
+            <div class="bench-art notes-art" aria-hidden="true"><span></span><span></span><span></span><b>?</b></div>
+            <h3>Engineering notebook</h3>
+            <p>Design notes, technical questions, experiments, and ideas worth pursuing.</p>
+            <span>Exploration</span>
+          </article>
+        </div>
 
-  const printTerminal = (command) => {
-    if (!history) return;
-    const key = command.trim().toLowerCase();
-    if (!key) return;
-    const commandLine = document.createElement('p');
-    commandLine.innerHTML = `<span style="color:var(--accent)">tj@portfolio:~$</span> ${escapeHtml(key)}`;
-    history.appendChild(commandLine);
+        <div class="terminal reveal" id="terminal">
+          <div class="terminal-top"><span>tj@workbench</span><span>interactive console</span></div>
+          <div class="terminal-output" id="terminal-output" aria-live="polite">
+            <p><span class="prompt">tj@workbench:~$</span> help</p>
+            <p class="terminal-response">projects&nbsp;&nbsp;— selected work<br>resume&nbsp;&nbsp;&nbsp;&nbsp;— open résumé<br>bike&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— e-bike development<br>about&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— background<br>contact&nbsp;&nbsp;&nbsp;— get in touch<br>clear&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;— clear terminal</p>
+          </div>
+          <form class="terminal-form" id="terminal-form">
+            <label for="terminal-input" class="sr-only">Terminal command</label>
+            <span class="prompt">tj@workbench:~$</span>
+            <input id="terminal-input" name="command" autocomplete="off" spellcheck="false" />
+            <span class="terminal-caret" aria-hidden="true"></span>
+          </form>
+        </div>
+      </div>
+    </section>
 
-    if (key === 'clear') {
-      history.innerHTML = '<p><span class="terminal__muted">System:</span> Terminal cleared.</p>';
-    } else {
-      const response = document.createElement('p');
-      response.className = terminalCommands[key] ? 'terminal__response' : 'terminal__error';
-      response.textContent = terminalCommands[key] || `Command not found: ${key}. Try “help”.`;
-      history.appendChild(response);
-      if (key === 'resume') window.setTimeout(() => { window.location.href = 'resume.html'; }, 350);
-    }
-    history.scrollTop = history.scrollHeight;
-  };
+    <section class="process shell section-rule" aria-labelledby="process-title">
+      <div class="process-intro reveal">
+        <p class="section-label">// How I build</p>
+        <h2 id="process-title">Curiosity.<br>First principles.</h2>
+      </div>
+      <div class="process-grid">
+        <article class="process-step reveal"><span class="process-icon">↗</span><div><h3>Explore</h3><p>Understand the problem deeply, question assumptions, and identify the constraints that actually matter.</p></div></article>
+        <article class="process-step reveal"><span class="process-icon">▦</span><div><h3>Design</h3><p>Turn the constraints into a clear system: hierarchy, states, architecture, and a plan that can survive contact with reality.</p></div></article>
+        <article class="process-step reveal"><span class="process-icon">⌁</span><div><h3>Build</h3><p>Prototype, test, revise, and keep polishing until the result feels trustworthy—not merely technically complete.</p></div></article>
+      </div>
+    </section>
 
-  function escapeHtml(value) {
-    return value.replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
-  }
+    <section class="about shell section-rule" id="about" aria-labelledby="about-title">
+      <div class="about-heading reveal">
+        <p class="section-label">// About</p>
+        <h2 id="about-title">Engineering foundation.<br>Product mindset.</h2>
+      </div>
+      <div class="about-copy reveal">
+        <p>I’m transferring to Northeastern University to study Computer Science after building a foundation in Computer Engineering at the University of Rhode Island. That path shaped how I think: software is never isolated from the people, hardware, constraints, and systems around it.</p>
+        <p>I’m most energized by ambitious projects with a real user, a real constraint, or a real physical component—especially work at the intersection of product engineering, startups, and emerging technology.</p>
+        <div class="about-facts">
+          <div><span>Education</span><strong>Northeastern CS · URI Engineering</strong></div>
+          <div><span>Focus</span><strong>Product engineering · Startups · Hardware</strong></div>
+          <div><span>Location</span><strong>Boston / Rhode Island</strong></div>
+        </div>
+      </div>
+    </section>
 
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (!input) return;
-    printTerminal(input.value);
-    input.value = '';
-  });
-  commandButtons.forEach((button) => button.addEventListener('click', () => {
-    printTerminal(button.dataset.command || '');
-    input?.focus();
-  }));
+    <section class="contact shell section-rule" id="contact" aria-labelledby="contact-title">
+      <p class="section-label reveal">// Contact</p>
+      <div class="contact-layout">
+        <div class="reveal">
+          <h2 id="contact-title">Let’s build something worth remembering.</h2>
+          <p>I’m open to internships, co-ops, collaborations, and conversations about ambitious technical ideas.</p>
+        </div>
+        <div class="contact-links reveal">
+          <a href="mailto:tjblech@gmail.com"><span>Email</span><strong>tjblech@gmail.com</strong><i>→</i></a>
+          <a href="https://github.com/tjblech" target="_blank" rel="noreferrer"><span>GitHub</span><strong>github.com/tjblech</strong><i>→</i></a>
+          <a href="https://www.linkedin.com/in/tj-blechman-1190aa3ab" target="_blank" rel="noreferrer"><span>LinkedIn</span><strong>TJ Blechman</strong><i>→</i></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  const canvas = document.getElementById('signal-canvas');
-  if (canvas instanceof HTMLCanvasElement && !reduceMotion) {
-    const ctx = canvas.getContext('2d', { alpha: true });
-    if (ctx) {
-      let width = 0;
-      let height = 0;
-      let dpr = 1;
-      let nodes = [];
-      const mouse = { x: -9999, y: -9999 };
-
-      const resize = () => {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, 1.7);
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.max(28, Math.min(82, Math.floor(width * height / 26000)));
-        nodes = Array.from({ length: count }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.17,
-          vy: (Math.random() - 0.5) * 0.17,
-          r: Math.random() * 1.2 + 0.45
-        }));
-      };
-      resize();
-      window.addEventListener('resize', resize, { passive: true });
-      window.addEventListener('mousemove', (event) => {
-        mouse.x = event.clientX;
-        mouse.y = event.clientY;
-      }, { passive: true });
-
-      const render = () => {
-        ctx.clearRect(0, 0, width, height);
-        const accent = signalMode ? [255, 118, 108] : [120, 247, 207];
-        nodes.forEach((node) => {
-          node.x += node.vx * (signalMode ? 2.1 : 1);
-          node.y += node.vy * (signalMode ? 2.1 : 1);
-          if (node.x < -20) node.x = width + 20;
-          if (node.x > width + 20) node.x = -20;
-          if (node.y < -20) node.y = height + 20;
-          if (node.y > height + 20) node.y = -20;
-
-          const mdx = mouse.x - node.x;
-          const mdy = mouse.y - node.y;
-          const md = Math.hypot(mdx, mdy);
-          if (md < 160 && md > 0) {
-            node.x -= (mdx / md) * 0.12;
-            node.y -= (mdy / md) * 0.12;
-          }
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${accent[0]},${accent[1]},${accent[2]},.38)`;
-          ctx.fill();
-        });
-
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i + 1; j < nodes.length; j++) {
-            const a = nodes[i];
-            const b = nodes[j];
-            const distance = Math.hypot(a.x - b.x, a.y - b.y);
-            const limit = signalMode ? 150 : 118;
-            if (distance < limit) {
-              const alpha = (1 - distance / limit) * (signalMode ? 0.15 : 0.075);
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = `rgba(${accent[0]},${accent[1]},${accent[2]},${alpha})`;
-              ctx.lineWidth = 0.7;
-              ctx.stroke();
-            }
-          }
-        }
-        requestAnimationFrame(render);
-      };
-      requestAnimationFrame(render);
-    }
-  }
-})();
+  <footer class="site-footer shell">
+    <span>© <span id="year"></span> TJ Blechman</span>
+    <span>Designed and built from scratch.</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+</body>
+</html>
