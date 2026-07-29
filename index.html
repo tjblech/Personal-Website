@@ -6,23 +6,70 @@
   <meta name="description" content="TJ Blechman — Northeastern computer science student interested in startups, software engineering, and quant.">
   <meta name="theme-color" content="#161220">
   <title>TJ Blechman</title>
-  <style>html,body{margin:0;min-height:100%;background:#161220;color:#f1ecf5;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;color:#b3a7c2;font-size:14px}</style>
+  <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
-  <div class="loading" id="loading">loading…</div>
-  <script>
-  (async()=>{
-    const source='https://raw.githubusercontent.com/tjblech/Personal-Website/d18f2138ab1ea7bf7d0bb3d3d79d302a6e2096b8/index.html';
-    const response=await fetch(source);
-    if(!response.ok) throw new Error(`Could not load homepage (${response.status})`);
-    let html=await response.text();
-    html=html.replace('href="#work">see my work','href="work.html">see my work');
-    document.open();
-    document.write(html);
-    document.close();
-  })().catch(error=>{
-    document.getElementById('loading').textContent=error.message;
-  });
-  </script>
+<div class="ph-root" id="phRoot">
+<canvas class="ph-flowfield" id="phFlowField"></canvas>
+<div class="ph-vignette"></div>
+<div class="ph-eyes-wrap" id="phEyesWrap">
+<div class="ph-eyes" id="phEyes">
+<div class="ph-pupil" id="phPupilL"></div>
+<div class="ph-pupil" id="phPupilR"></div>
+</div>
+<div class="ph-eyes-hint">click me</div>
+</div>
+<div class="ph-hero">
+<div class="ph-eyebrow" id="phEyebrow">TJ BLECHMAN · BOSTON · COMPUTER SCIENCE</div>
+<div aria-label="Hi, I'm TJ Blechman" class="ph-name-line" id="phNameStage">
+<div aria-hidden="true" class="ph-typed-line" id="phTypedLine">
+<span id="phPrefix"></span><span class="ph-name-cycle" id="phName"></span><span class="ph-cursor" id="phCursor"></span>
+</div>
+</div>
+<p class="ph-tagline" id="phTagline"></p>
+<nav aria-label="Portfolio links" class="ph-actions" id="phActions">
+<a class="ph-action primary" href="#work">see my work <span aria-hidden="true" class="ph-action-arrow">↘</span></a>
+<a class="ph-action" href="#about">about</a>
+<a class="ph-action" href="mailto:tjblech@gmail.com">contact</a>
+</nav>
+</div>
+<div class="ph-modal-backdrop" id="phModalBackdrop">
+<div class="ph-modal">
+<button class="ph-modal-close" id="phModalClose">×</button>
+<div class="ph-modal-title">Chess</div>
+<div class="ph-modal-sub" id="phStatus">you're white — make a move</div>
+<div class="ph-board" id="phBoard"></div>
+<div class="ph-modal-footer">
+<button class="ph-small-btn" id="phReset">new game</button>
+</div>
+</div>
+</div>
+</div>
+
+<section class="pw-section" id="work">
+<div class="pw-glow"></div>
+<div class="pw-grain"></div>
+<div class="pw-divider"></div>
+<div class="pw-header" id="pwHeader">
+<span class="pw-eyebrow"><span class="sr-only" id="pwEyebrowSR"></span><span aria-hidden="true" id="pwEyebrowText"></span></span>
+<h2 class="pw-heading"><span class="sr-only" id="pwHeadingSR"></span><span aria-hidden="true" id="pwHeadingText"></span></h2>
+<p class="pw-intro" id="pwIntro"></p>
+</div>
+<div class="pw-editor" id="pwEditor">
+<div class="pw-editor-chrome">
+<span class="pw-dot red"></span><span class="pw-dot yellow"></span><span class="pw-dot green"></span>
+<span class="pw-editor-path">~/projects</span>
+</div>
+<div class="pw-editor-body">
+<div aria-label="Projects" aria-orientation="vertical" class="pw-sidebar" id="pwSidebar" role="tablist">
+<div class="pw-sidebar-prompt">tj@portfolio ~/projects $ ls</div>
+</div>
+<div class="pw-pane" id="pwPane"></div>
+</div>
+</div>
+</section>
+
+<script src="hero.js"></script>
+<script src="work.js"></script>
 </body>
 </html>
