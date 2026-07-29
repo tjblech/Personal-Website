@@ -1,66 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="TJ Blechman — Northeastern computer science student interested in startups, software engineering, and quant.">
-  <meta name="theme-color" content="#161220">
-  <title>TJ Blechman</title>
-  <link rel="stylesheet" href="portfolio.css">
-</head>
-<body>
-<div class="ph-root" id="phRoot">
-<canvas class="ph-flowfield" id="phFlowField"></canvas>
-<div class="ph-vignette"></div>
-<div class="ph-eyes-wrap" id="phEyesWrap">
-<div class="ph-eyes" id="phEyes">
-<div class="ph-pupil" id="phPupilL"></div>
-<div class="ph-pupil" id="phPupilR"></div>
-</div>
-<div class="ph-eyes-hint">click me</div>
-</div>
-<div class="ph-hero">
-<div class="ph-eyebrow" id="phEyebrow">TJ BLECHMAN · BOSTON · COMPUTER SCIENCE</div>
-<div aria-label="Hi, I'm TJ Blechman" class="ph-name-line" id="phNameStage">
-<div aria-hidden="true" class="ph-typed-line" id="phTypedLine">
-<span id="phPrefix"></span><span class="ph-name-cycle" id="phName"></span><span class="ph-cursor" id="phCursor"></span>
-</div>
-</div>
-<p class="ph-tagline" id="phTagline"></p>
-<nav aria-label="Portfolio links" class="ph-actions" id="phActions">
-<a class="ph-action primary" href="#work">see my work <span aria-hidden="true" class="ph-action-arrow">↘</span></a>
-<a class="ph-action" href="#about">about</a>
-<a class="ph-action" href="mailto:tjblech@gmail.com">contact</a>
-</nav>
-</div>
-<div class="ph-modal-backdrop" id="phModalBackdrop">
-<div class="ph-modal">
-<button class="ph-modal-close" id="phModalClose">×</button>
-<div class="ph-modal-title">Chess</div>
-<div class="ph-modal-sub" id="phStatus">you're white — make a move</div>
-<div class="ph-board" id="phBoard"></div>
-<div class="ph-modal-footer">
-<button class="ph-small-btn" id="phReset">new game</button>
-</div>
-</div>
-</div>
-</div>
-
-<script>
 (function(){
 
-  /* =========================================================
-     EDIT THIS: your real name / initials / nickname / tagline
-     ========================================================= */
   const CONFIG = {
     fullName: "Tory",
-    nickname: "T.J.",
+    nickname: "TJ",
     tagline: "a computer science student at Northeastern, interested in startups, software engineering, and quant."
   };
 
   const root = document.getElementById('phRoot');
 
-  /* ---------------- flow field background ---------------- */
   (function(){
     const canvas = document.getElementById('phFlowField');
     const ctx = canvas.getContext('2d');
@@ -118,8 +65,6 @@
     function frame(){
       const width = root.clientWidth;
       const height = root.clientHeight;
-
-      /* Full clear prevents any old path from accumulating. */
       ctx.fillStyle = BG;
       ctx.fillRect(0,0,width,height);
       t += .0015;
@@ -157,7 +102,6 @@
     requestAnimationFrame(frame);
   })();
 
-  /* ---------------- letter-by-letter reveal + cycling ---------------- */
   const prefixEl = document.getElementById('phPrefix');
   const nameEl = document.getElementById('phName');
   const nameStage = document.getElementById('phNameStage');
@@ -259,7 +203,6 @@
     beginIntro();
   }
 
-  /* ---------------- eyes ---------------- */
   const eyesWrap = document.getElementById('phEyesWrap');
   const eyes = document.getElementById('phEyes');
   const pupilL = document.getElementById('phPupilL');
@@ -286,7 +229,6 @@
   }
   setTimeout(blink, 4000);
 
-  /* ================= CHESS ================= */
   const backdrop = document.getElementById('phModalBackdrop');
   const boardEl = document.getElementById('phBoard');
   const statusEl = document.getElementById('phStatus');
@@ -618,9 +560,3 @@
   }
 
 })();
-</script>
-
-<script src="hero.js"></script>
-<script src="work.js"></script>
-</body>
-</html>
