@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#161220">
   <title>TJ Blechman</title>
   <link rel="stylesheet" href="portfolio.css">
+  <link rel="stylesheet" href="about.css">
 </head>
 <body>
   <div class="ph-root" id="phRoot">
@@ -74,7 +75,90 @@
     </div>
   </section>
 
+  <section class="pa-section" id="about">
+    <div class="pa-glow"></div>
+    <div class="pa-grain"></div>
+    <div class="pa-divider"></div>
+
+    <div class="pa-wrap">
+      <div class="pa-header" id="paHeader">
+        <span class="pa-eyebrow"><span class="sr-only" id="paEyebrowSR"></span><span aria-hidden="true" id="paEyebrowText"></span></span>
+        <h2 class="pa-heading"><span class="sr-only" id="paHeadingSR"></span><span aria-hidden="true" id="paHeadingText"></span></h2>
+        <p class="pa-story" id="paStory"></p>
+      </div>
+
+      <div class="pa-block pa-focus" id="paFocus">
+        <div class="pa-block-label">$ priorities --sort=desc</div>
+        <div class="pa-bar-row" style="--target:100%">
+          <div class="pa-bar-top"><span class="pa-bar-title">Startups</span></div>
+          <div class="pa-bar-track"><div class="pa-bar-fill" style="background:var(--gold)"></div></div>
+          <p class="pa-bar-note">The main goal: building something of my own, or getting in early on someone else's.</p>
+        </div>
+        <div class="pa-bar-row" style="--target:68%">
+          <div class="pa-bar-top"><span class="pa-bar-title">Software Engineering</span></div>
+          <div class="pa-bar-track"><div class="pa-bar-fill" style="background:var(--rose)"></div></div>
+          <p class="pa-bar-note">The reliable path if the startup thing doesn't pan out.</p>
+        </div>
+        <div class="pa-bar-row" style="--target:40%">
+          <div class="pa-bar-top"><span class="pa-bar-title">Quant</span></div>
+          <div class="pa-bar-track"><div class="pa-bar-fill" style="background:var(--slate)"></div></div>
+          <p class="pa-bar-note">If I end up wanting more math and less ambiguity.</p>
+        </div>
+      </div>
+
+      <div class="pa-split">
+        <div class="pa-block" id="paThinkBlock">
+          <div class="pa-block-label">how i think</div>
+          <div class="pa-think">
+            <div class="pa-knight-wrap"><canvas id="paKnightCanvas" aria-label="Animated knight-move path"></canvas></div>
+            <p class="pa-think-text">I like building things and solving problems more than almost anything else. I still love math, up to a point, and I'm a sucker for a good puzzle, chess especially: the kind of thing you can't stop turning over in your head until it clicks.</p>
+          </div>
+        </div>
+
+        <div class="pa-block" id="paCurrentlyBlock">
+          <div class="pa-block-label">currently</div>
+          <p class="pa-currently-line">Transferring to Northeastern as a junior starting the coming semester, graduating in 2028.</p>
+          <div class="pa-stack">
+            <span class="pa-stack-label">know</span>
+            <span class="pa-pill solid">C++</span>
+            <span class="pa-pill solid">Supabase</span>
+            <span class="pa-pill solid">Vercel</span>
+            <span class="pa-pill solid">Cloudflare</span>
+            <span class="pa-pill solid">Assembly</span>
+          </div>
+          <div class="pa-stack">
+            <span class="pa-stack-label">learning</span>
+            <span class="pa-pill outline">Python</span>
+            <span class="pa-pill outline">SQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pa-block pa-hobbies" id="paHobbies">
+        <div class="pa-block-label">off the clock</div>
+        <div class="pa-pill-row">
+          <span class="pa-hobby-pill">Guitar</span>
+          <span class="pa-hobby-pill">Saxophone</span>
+          <span class="pa-hobby-pill">Basketball</span>
+          <span class="pa-hobby-pill">Hiking</span>
+          <span class="pa-hobby-pill">Chess</span>
+          <span class="pa-hobby-pill">Billiards</span>
+          <span class="pa-hobby-pill">Reading</span>
+          <span class="pa-hobby-pill">Documentaries</span>
+          <span class="pa-hobby-pill">Video Games</span>
+        </div>
+        <p class="pa-aside">Usually with a pair of HiFiMan Arya Stealths on.</p>
+      </div>
+
+      <div class="pa-block pa-elsewhere" id="paElsewhere">
+        <a class="pa-elsewhere-link" href="https://www.linkedin.com/in/tj-blechman-1190aa3ab" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a class="pa-elsewhere-link" href="https://github.com/tjblech" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
   <script src="hero.js"></script>
   <script src="work.js"></script>
+  <script src="about.js"></script>
 </body>
 </html>
