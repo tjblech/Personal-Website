@@ -8,6 +8,7 @@
   <title>TJ Blechman</title>
   <link rel="stylesheet" href="portfolio.css">
   <link rel="stylesheet" href="about.css">
+  <link rel="stylesheet" href="contact.css">
 </head>
 <body>
   <div class="ph-root" id="phRoot">
@@ -33,7 +34,7 @@
       <nav class="ph-actions" id="phActions" aria-label="Portfolio links">
         <a class="ph-action primary" href="#work">see my work <span class="ph-action-arrow" aria-hidden="true">↘</span></a>
         <a class="ph-action" href="#about">about</a>
-        <a class="ph-action" href="mailto:tjblech@gmail.com">contact</a>
+        <a class="ph-action" href="#contact">contact</a>
       </nav>
     </div>
 
@@ -157,8 +158,31 @@
     </div>
   </section>
 
+  <section class="pc-section" id="contact">
+    <canvas class="pc-canvas" id="pcCanvas" aria-hidden="true"></canvas>
+    <div class="pc-spotlight"></div>
+    <div class="pc-divider"></div>
+
+    <div class="pc-wrap" id="pcWrap">
+      <span class="pc-eyebrow"><span class="sr-only" id="pcEyebrowSR"></span><span aria-hidden="true" id="pcEyebrowText"></span></span>
+      <h2 class="pc-heading"><span class="sr-only" id="pcHeadingSR"></span><span aria-hidden="true" id="pcHeadingText"></span></h2>
+      <p class="pc-intro" id="pcIntro"></p>
+
+      <a class="pc-email" id="pcEmail" href="mailto:tjblech@gmail.com">tjblech@gmail.com</a>
+
+      <div class="pc-links">
+        <a class="pc-link" href="https://www.linkedin.com/in/tj-blechman-1190aa3ab" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        <a class="pc-link" href="https://github.com/tjblech" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+
+      <p class="pc-meta" id="pcMeta"></p>
+      <a class="pc-top" href="#phRoot">back to top ↑</a>
+    </div>
+  </section>
+
   <script src="hero.js"></script>
   <script src="work.js"></script>
   <script src="about.js"></script>
+  <script src="contact.js"></script>
 </body>
 </html>
