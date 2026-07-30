@@ -3,14 +3,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="TJ Blechman — Northeastern computer science student interested in startups, software engineering, and quant.">
+  <meta name="description" content="TJ Blechman is a Northeastern computer science student building software, websites, and hardware projects for startups and real-world use.">
   <meta name="theme-color" content="#161220">
-  <title>TJ Blechman</title>
+
+  <title>TJ Blechman — Computer Science & Startup Builder</title>
+  <link rel="canonical" href="https://tjblech.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="TJ Blechman">
+  <meta property="og:title" content="TJ Blechman — Computer Science & Startup Builder">
+  <meta property="og:description" content="Northeastern computer science student building software, websites, and hardware projects for startups and real-world use.">
+  <meta property="og:url" content="https://tjblech.github.io/">
+  <meta property="og:image" content="https://tjblech.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TJ Blechman — computer science, Northeastern, building for startups">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TJ Blechman — Computer Science & Startup Builder">
+  <meta name="twitter:description" content="Northeastern computer science student building software, websites, and hardware projects for startups and real-world use.">
+  <meta name="twitter:image" content="https://tjblech.github.io/og-image.png">
+
   <link rel="stylesheet" href="portfolio.css">
   <link rel="stylesheet" href="about.css">
   <link rel="stylesheet" href="contact.css">
+  <link rel="stylesheet" href="site-shell.css">
 </head>
 <body>
+  <nav class="sn-nav" id="snNav" aria-label="Site navigation">
+    <a class="sn-mark" href="#phRoot" aria-label="Back to top">T</a>
+    <div class="sn-links">
+      <a class="sn-link" href="#work" data-section="work">work</a>
+      <a class="sn-link" href="#about" data-section="about">about</a>
+      <a class="sn-link resume" href="resume.html" target="_blank" rel="noopener">resume</a>
+      <a class="sn-link" href="#contact" data-section="contact">contact</a>
+    </div>
+  </nav>
+
   <div class="ph-root" id="phRoot">
     <canvas class="ph-flowfield" id="phFlowField"></canvas>
     <div class="ph-vignette"></div>
@@ -33,8 +64,10 @@
       <p class="ph-tagline" id="phTagline"></p>
       <nav class="ph-actions" id="phActions" aria-label="Portfolio links">
         <a class="ph-action primary" href="#work">see my work <span class="ph-action-arrow" aria-hidden="true">↘</span></a>
+        <a class="ph-action" href="resume.html" target="_blank" rel="noopener">resume</a>
         <a class="ph-action" href="#about">about</a>
         <a class="ph-action" href="#contact">contact</a>
+        <a class="ph-action" href="https://www.linkedin.com/in/tj-blechman" target="_blank" rel="noopener noreferrer">linkedin <span class="ph-action-arrow" aria-hidden="true">↗</span></a>
       </nav>
     </div>
 
@@ -180,10 +213,24 @@
     </div>
   </section>
 
+  <footer class="sf-footer">
+    <p class="sf-line">TJ Blechman · <span id="sfYear"></span></p>
+    <p class="sf-sub">Designed and built by hand.</p>
+    <div class="sf-links">
+      <a href="#work">work</a>
+      <a href="#about">about</a>
+      <a href="#contact">contact</a>
+      <a href="resume.html" target="_blank" rel="noopener">resume</a>
+      <a href="https://www.linkedin.com/in/tj-blechman" target="_blank" rel="noopener noreferrer">linkedin</a>
+      <a href="https://github.com/tjblech" target="_blank" rel="noopener noreferrer">github</a>
+    </div>
+  </footer>
+
   <script src="hero-cycle-guard.js"></script>
   <script src="hero.js"></script>
   <script src="work.js"></script>
   <script src="about.js"></script>
   <script src="contact.js"></script>
+  <script src="site-shell.js"></script>
 </body>
 </html>
