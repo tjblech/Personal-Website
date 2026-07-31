@@ -1,82 +1,200 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f3f1ea" />
-  <title>Résumé — TJ Blechman</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <style>
-    :root { --ink:#0b0d10; --muted:#5e6670; --paper:#f3f1ea; --accent:#126b5a; --line:#c9c6bd; }
-    * { box-sizing:border-box; }
-    body { margin:0; color:var(--ink); background:#11151b; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.45; }
-    a { color:inherit; text-decoration:none; }
-    .toolbar { position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 22px; color:#e8ebef; background:rgba(8,11,15,.88); border-bottom:1px solid rgba(255,255,255,.1); backdrop-filter:blur(14px); }
-    .toolbar a,.toolbar button { border:0; color:inherit; background:none; font:650 12px/1 ui-monospace,monospace; letter-spacing:.08em; cursor:pointer; }
-    .toolbar button { padding:10px 14px; color:#07100d; background:#78f7cf; border-radius:999px; }
-    .page { width:min(900px,calc(100% - 32px)); margin:36px auto; padding:58px 64px; background:var(--paper); box-shadow:0 30px 100px rgba(0,0,0,.34); }
-    header { display:grid; grid-template-columns:1fr auto; gap:36px; align-items:end; padding-bottom:26px; border-bottom:2px solid var(--ink); }
-    h1 { margin:0; font-size:56px; line-height:.9; letter-spacing:-.065em; }
-    .headline { margin:14px 0 0; color:var(--accent); font-size:15px; font-weight:750; }
-    .contact { text-align:right; color:var(--muted); font-size:12px; line-height:1.7; }
-    .contact a { border-bottom:1px solid var(--line); }
-    main { display:grid; grid-template-columns:.72fr 1.28fr; gap:46px; padding-top:34px; }
-    section { margin-bottom:32px; }
-    h2 { margin:0 0 16px; color:var(--accent); font:800 10px/1 ui-monospace,monospace; letter-spacing:.16em; text-transform:uppercase; }
-    h3 { margin:0; font-size:15px; letter-spacing:-.015em; }
-    p { margin:7px 0 0; color:var(--muted); font-size:12px; }
-    .item { margin-bottom:22px; }
-    .item__top { display:flex; justify-content:space-between; gap:20px; align-items:baseline; }
-    .item__top span { color:var(--muted); font:600 9px/1 ui-monospace,monospace; white-space:nowrap; }
-    ul { margin:9px 0 0; padding-left:17px; color:var(--muted); font-size:12px; }
-    li { margin:5px 0; }
-    .skill-group { margin-bottom:18px; }
-    .skill-group strong { display:block; margin-bottom:5px; font-size:12px; }
-    .skill-group p { line-height:1.65; }
-    .stat { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); font-size:12px; }
-    .stat span { color:var(--muted); }
-    .summary { color:#33383f; font-size:13px; line-height:1.65; }
-    .note { margin-top:26px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:10px; }
-    @media (max-width:700px) { .page{padding:38px 26px}.page header{grid-template-columns:1fr}.contact{text-align:left}main{grid-template-columns:1fr;gap:10px}h1{font-size:45px}.toolbar span{display:none} }
-    @media print { body{background:white}.toolbar{display:none}.page{width:100%;margin:0;padding:.45in .55in;box-shadow:none}a{border:0!important} }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TJ Blechman — Resume</title>
+<meta name="description" content="Resume of TJ Blechman, computer science student at Northeastern University.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  --ink:#221e27;
+  --muted:#5c5560;
+  --rule:#e4dfe8;
+  --accent:#6b4570;
+  --paper:#ffffff;
+}
+*{ box-sizing:border-box; }
+body{
+  margin:0 auto;
+  max-width:760px;
+  padding:52px 40px 70px;
+  background:#ffffff;
+  color:var(--ink);
+  font-family:'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size:14px;
+  line-height:1.5;
+}
+.name{
+  font-family:'Fraunces', Georgia, 'Times New Roman', serif;
+  font-weight:600;
+  font-size:34px;
+  text-align:center;
+  margin:0 0 6px;
+}
+.contact{
+  text-align:center;
+  color:var(--muted);
+  font-size:12.5px;
+  margin:0 0 22px;
+}
+.contact a{ color:var(--muted); text-decoration:none; }
+.contact a:hover{ color:var(--accent); }
+.summary{
+  margin:0 0 20px;
+  color:var(--ink);
+}
+h2{
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--accent);
+  border-bottom:1.5px solid var(--accent);
+  padding-bottom:5px;
+  margin:24px 0 10px;
+}
+.entry{ margin-bottom:12px; }
+.entry:last-child{ margin-bottom:0; }
+.entry-top{ overflow:hidden; }
+.entry-date{ float:right; color:var(--muted); font-size:12.5px; white-space:nowrap; }
+.entry-title{ font-weight:600; font-size:14.5px; }
+.entry-meta{ color:var(--muted); font-style:italic; font-size:13px; }
+.entry-sub{ color:var(--muted); font-size:13px; margin:2px 0 4px; }
+ul.bullets{
+  margin:4px 0 0;
+  padding-left:18px;
+}
+ul.bullets li{ margin-bottom:3px; }
+.skills-line{ margin:0 0 4px; }
+.skills-line .label{ font-weight:600; }
+.learning{ color:var(--muted); font-style:italic; font-size:13px; margin-top:6px; }
+
+@media print{
+  body{ max-width:none; padding:0; }
+  @page{ margin:0.5in; }
+}
+</style>
 </head>
 <body>
-  <div class="toolbar"><a href="index.html">← Portfolio</a><span>PRINT-READY WEB RÉSUMÉ</span><button type="button" onclick="window.print()">Print / Save PDF</button></div>
-  <article class="page">
-    <header>
-      <div><h1>TJ Blechman</h1><p class="headline">Computer Science Student • Engineer • Product Builder</p></div>
-      <div class="contact">
-        Wakefield, Rhode Island<br />
-        <a href="mailto:tjblech@gmail.com">tjblech@gmail.com</a><br />
-        <a href="https://github.com/tjblech">github.com/tjblech</a><br />
-        <a href="https://www.linkedin.com/in/tj-blechman-1190aa3ab">LinkedIn profile</a>
-      </div>
-    </header>
-    <main>
-      <aside>
-        <section><h2>Profile</h2><p class="summary">Incoming Computer Science student at Northeastern University with a computer engineering foundation and experience building public-facing web products, client websites, and practical software systems. Interested in product engineering, startups, embedded systems, and turning ambitious ideas into polished tools.</p></section>
-        <section><h2>Core skills</h2>
-          <div class="skill-group"><strong>Languages</strong><p>C++, JavaScript, TypeScript, HTML, CSS, MATLAB</p></div>
-          <div class="skill-group"><strong>Tools & platforms</strong><p>React, Git, GitHub Pages, Supabase, Cloudflare, Google APIs</p></div>
-          <div class="skill-group"><strong>Strengths</strong><p>Product design, UI systems, responsive development, technical problem solving, rapid prototyping</p></div>
-        </section>
-        <section><h2>Highlights</h2><div class="stat"><span>URI GPA</span><strong>3.80</strong></div><div class="stat"><span>Academic standing</span><strong>Dean’s List</strong></div><div class="stat"><span>Focus</span><strong>Build + ship</strong></div></section>
-      </aside>
-      <div>
-        <section><h2>Education</h2>
-          <div class="item"><div class="item__top"><h3>Northeastern University</h3><span>BEGINNING FALL 2026</span></div><p>Computer Science — incoming transfer student</p></div>
-          <div class="item"><div class="item__top"><h3>University of Rhode Island</h3><span>2024–2026</span></div><p>Computer Engineering coursework • 3.80 GPA • Dean’s List</p><ul><li>Coursework across programming, circuits, calculus, linear algebra, physics, and engineering design.</li><li>Built a multidisciplinary foundation spanning software and hardware systems.</li></ul></div>
-        </section>
-        <section><h2>Selected projects</h2>
-          <div class="item"><div class="item__top"><h3>Jack Cadman Campaign Website</h3><span>CLIENT PROJECT / 2026</span></div><p>Designed and deployed a responsive public-facing campaign website from scratch.</p><ul><li>Owned visual direction, information hierarchy, implementation, deployment, and iteration.</li><li>Used GitHub Pages, Jekyll, and Cloudflare to deliver a reliable production site.</li></ul></div>
-          <div class="item"><div class="item__top"><h3>Billiards Tournament Manager</h3><span>PRODUCT SYSTEM / 2026</span></div><p>Built a mobile-friendly tournament management system to replace fragmented event workflows.</p><ul><li>Implemented live brackets, two-table queueing, organizer/public views, late-arrival handling, leaderboard support, and persistent state.</li><li>Designed around real tournament operations rather than a generic bracket template.</li></ul></div>
-          <div class="item"><div class="item__top"><h3>Common Ground</h3><span>EARLY PROTOTYPE / 2026</span></div><p>Created a resource-coordination concept for immigrants seeking trusted legal, healthcare, housing, and community support.</p><ul><li>Focused on search, information architecture, trust, and accessibility.</li><li>Prototyped with HTML, CSS, JavaScript, and Google services.</li></ul></div>
-        </section>
-        <section><h2>Current exploration</h2><div class="item"><div class="item__top"><h3>Custom Electric Bike Platform</h3><span>IN DEVELOPMENT</span></div><p>Exploring system architecture, battery packaging, performance constraints, and future telemetry for a custom 52V e-bike build.</p></div></section>
-      </div>
-    </main>
-    <p class="note">This résumé is intentionally delivered as a print-ready web page so it remains usable on GitHub Pages without external files or build tools.</p>
-  </article>
+
+  <h1 class="name">TJ Blechman</h1>
+  <p class="contact">
+    Wakefield, RI &middot; (401) 369-4492 &middot;
+    <a href="mailto:tjblech@gmail.com">tjblech@gmail.com</a> &middot;
+    <a href="https://github.com/tjblech" target="_blank" rel="noopener">github.com/tjblech</a> &middot;
+    <a href="https://www.linkedin.com/in/tj-blechman" target="_blank" rel="noopener">linkedin.com/in/tj-blechman</a>
+  </p>
+
+  <p class="summary">Computer science student transferring to Northeastern University with a computer engineering foundation and hands-on experience shipping full-stack web products end-to-end, from architecture to deployment. Looking to join an early-stage startup team or a software engineering role where I can build things that ship fast.</p>
+
+  <h2>Education</h2>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">Expected May 2028</span>
+      <span class="entry-title">Northeastern University &mdash; B.S. Computer Science (Transfer)</span>
+    </div>
+    <div class="entry-sub">Boston, MA &middot; Incoming Fall 2026</div>
+  </div>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">2024 &ndash; 2026</span>
+      <span class="entry-title">University of Rhode Island &mdash; Computer Engineering coursework</span>
+    </div>
+    <div class="entry-sub">Kingston, RI &middot; GPA: 3.80</div>
+    <div class="entry-sub">Relevant coursework: Calculus I&ndash;II, Multivariable Calculus, Linear Algebra, Differential Equations, Physics I&ndash;II (with Labs), Digital Circuit Design, Linear Circuit Theory (with Lab), Intro to Computer Systems, Programming Fundamentals</div>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">Feb 2026 &ndash; Present</span>
+      <span class="entry-title">Billiards Tournament Manager</span>
+    </div>
+    <div class="entry-meta">React, TypeScript, Vite, Supabase, GitHub Actions</div>
+    <ul class="bullets">
+      <li>Built a live tournament bracket manager for pool leagues with real-time two-table queueing and single/double-elimination logic</li>
+      <li>Deployed a CI/CD pipeline with GitHub Actions to GitHub Pages, live at tjblech.github.io/Billiards, with a public QR-accessible bracket view</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">Dec 2025 &ndash; Present</span>
+      <span class="entry-title">Common Ground</span>
+    </div>
+    <div class="entry-meta">HTML, CSS, JavaScript, Google Apps Script</div>
+    <ul class="bullets">
+      <li>Built a resource hub centralizing legal, healthcare, and community resources for underserved populations</li>
+      <li>Designed an automated pipeline where a Google Form submission routes through Sheets for approval and posts directly to a public community calendar</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">2026</span>
+      <span class="entry-title">Campaign Website &mdash; School Committee Race</span>
+    </div>
+    <div class="entry-meta">Next.js, TypeScript, Tailwind CSS</div>
+    <ul class="bullets">
+      <li>Designed and deployed a full responsive campaign website end-to-end for a local candidate</li>
+      <li>Owned visual direction, information architecture, and deployment</li>
+    </ul>
+  </div>
+
+  <h2>Skills</h2>
+  <p class="skills-line"><span class="label">Languages:</span> C++, TypeScript, JavaScript, MATLAB</p>
+  <p class="skills-line"><span class="label">Frameworks &amp; Tools:</span> React, Vite, Supabase, Cloudflare, Vercel, GitHub Actions, Google APIs</p>
+  <p class="skills-line"><span class="label">Hardware:</span> Microcontrollers, oscilloscopes, Multisim, basic CAD</p>
+  <p class="learning">Currently learning: Python, SQL</p>
+
+  <h2>Leadership &amp; Activities</h2>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">Sep 2024 &ndash; Present</span>
+      <span class="entry-title">Billiards Club at URI</span>
+    </div>
+    <div class="entry-meta">Candidate for President</div>
+    <ul class="bullets">
+      <li>Won 7 tournaments and consistently placed among the club's top competitive players</li>
+      <li>Organizing weekly tournaments as a candidate for club president</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">Dec 2025 &ndash; Present</span>
+      <span class="entry-title">Rhody Racers &mdash; Formula SAE</span>
+    </div>
+    <div class="entry-meta">Incoming Member, Controls &amp; Telemetry</div>
+    <ul class="bullets">
+      <li>Preparing to support vehicle testing and data acquisition on the controls/telemetry subteam</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">2026 &ndash; Present</span>
+      <span class="entry-title">Mountain Bike &rarr; Ebike Conversion</span>
+    </div>
+    <div class="entry-meta">Personal Project</div>
+    <ul class="bullets">
+      <li>Converting a mountain bike into an ebike, working through motor, battery, and controller integration</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-top">
+      <span class="entry-date">2012 &ndash; Present</span>
+      <span class="entry-title">Music</span>
+    </div>
+    <div class="entry-meta">Saxophone &amp; Guitar</div>
+    <ul class="bullets">
+      <li>Alto saxophonist selected for regional honors band; self-taught guitarist with 10+ years of experience</li>
+    </ul>
+  </div>
+
+  <h2>Awards</h2>
+  <ul class="bullets">
+    <li>Multiple URI Billiards Tournament wins (2024&ndash;2026)</li>
+    <li>1st Place, State HOSA Competition &mdash; researched and presented on medical applications of Vitamin C</li>
+  </ul>
+
 </body>
 </html>
