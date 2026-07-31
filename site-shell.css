@@ -105,6 +105,48 @@
 }
 .sf-links a:hover{color:var(--ink)}
 
+/* Hero refresh from portfolio-hero-dark (4). */
+.ph-vignette{
+  background:radial-gradient(ellipse at 50% 42%,transparent 0%,transparent 48%,var(--bg) 96%);
+}
+.ph-eyes-hint{display:none}
+.ph-eyes-nudge{
+  position:absolute;
+  top:52px;
+  left:calc(50% + 58px);
+  z-index:6;
+  display:flex;
+  align-items:flex-start;
+  gap:6px;
+  color:var(--gold);
+  transform:rotate(-6deg);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .6s ease;
+}
+.ph-eyes-nudge.show{
+  opacity:.85;
+  animation:ph-nudge-wiggle 2.6s ease-in-out 1.2s infinite;
+}
+.ph-eyes-nudge.hide{opacity:0}
+.ph-eyes-nudge svg{
+  display:block;
+  flex:0 0 auto;
+  margin-top:-4px;
+}
+.ph-eyes-nudge span{
+  margin-top:8px;
+  color:var(--gold);
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  font-style:italic;
+  white-space:nowrap;
+}
+@keyframes ph-nudge-wiggle{
+  0%,100%{transform:rotate(-6deg) translate(0,0)}
+  50%{transform:rotate(-3deg) translate(-3px,2px)}
+}
+
 @media(max-width:600px){
   .sn-nav{padding:12px 16px;gap:12px}
   .sn-links{gap:14px;overflow-x:auto;scrollbar-width:none}
@@ -112,8 +154,12 @@
   .sn-link{font-size:12px}
   .sn-link.resume{padding:5px 11px}
 }
+@media(max-width:520px){
+  .ph-eyes-nudge{display:none}
+}
 
 @media(prefers-reduced-motion:reduce){
   .sn-nav{transition:opacity .2s ease;transform:none}
   .sn-nav:not(.show){visibility:hidden}
+  .ph-eyes-nudge.show{animation:none}
 }
