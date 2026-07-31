@@ -1,5 +1,8 @@
 (function(){
 
+  /* =========================================================
+     EDIT THIS: your real name / initials / nickname / tagline
+     ========================================================= */
   const CONFIG = {
     fullName: "Tory",
     nickname: "TJ",
@@ -8,6 +11,7 @@
 
   const root = document.getElementById('phRoot');
 
+  /* ---------------- flow field background ---------------- */
   (function(){
     const canvas = document.getElementById('phFlowField');
     const ctx = canvas.getContext('2d');
@@ -36,7 +40,7 @@
     function initParticles(){
       const width = root.clientWidth;
       const height = root.clientHeight;
-      const count = Math.min(160, Math.max(70, Math.round((width*height)/8000)));
+      const count = Math.min(190, Math.max(85, Math.round((width*height)/7000)));
       particles = Array.from({length:count},()=>{
         const p={};
         resetParticle(p,true);
@@ -65,6 +69,8 @@
     function frame(){
       const width = root.clientWidth;
       const height = root.clientHeight;
+
+      /* Full clear prevents any old path from accumulating. */
       ctx.fillStyle = BG;
       ctx.fillRect(0,0,width,height);
       t += .0015;
@@ -102,6 +108,7 @@
     requestAnimationFrame(frame);
   })();
 
+  /* ---------------- letter-by-letter reveal + cycling ---------------- */
   const prefixEl = document.getElementById('phPrefix');
   const nameEl = document.getElementById('phName');
   const nameStage = document.getElementById('phNameStage');
@@ -183,6 +190,7 @@
     taglineEl.textContent=CONFIG.tagline;
     taglineEl.classList.add('show');
     actionsEl.classList.add('show');
+    document.getElementById('phEyesNudge')?.classList.add('show');
     startNameCycle();
   }
 
@@ -203,6 +211,7 @@
     beginIntro();
   }
 
+  /* ---------------- eyes ---------------- */
   const eyesWrap = document.getElementById('phEyesWrap');
   const eyes = document.getElementById('phEyes');
   const pupilL = document.getElementById('phPupilL');
@@ -229,13 +238,22 @@
   }
   setTimeout(blink, 4000);
 
+  /* ================= CHESS ================= */
   const backdrop = document.getElementById('phModalBackdrop');
   const boardEl = document.getElementById('phBoard');
   const statusEl = document.getElementById('phStatus');
   const closeBtn = document.getElementById('phModalClose');
   const resetBtn = document.getElementById('phReset');
 
-  eyesWrap.addEventListener('click', ()=>{ backdrop.classList.add('open'); if(!chessStarted){ initChess(); chessStarted=true; } });
+  eyesWrap.addEventListener('click', ()=>{
+    backdrop.classList.add('open');
+    if(!chessStarted){ initChess(); chessStarted=true; }
+    const nudge = document.getElementById('phEyesNudge');
+    if(nudge){
+      nudge.classList.remove('show');
+      nudge.classList.add('hide');
+    }
+  });
   closeBtn.addEventListener('click', ()=> backdrop.classList.remove('open'));
   backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) backdrop.classList.remove('open'); });
   resetBtn.addEventListener('click', ()=> initChess());
