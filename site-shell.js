@@ -1,68 +1,60 @@
 (function(){
+  if(!document.querySelector('link[href="work-preview.css"]')){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='work-preview.css';
+    document.head.appendChild(link);
+  }
+
   const hero=document.getElementById('phRoot');
   const eyesWrap=document.getElementById('phEyesWrap');
 
-  if(hero && eyesWrap){
-    const oldHint=eyesWrap.querySelector('.ph-eyes-hint');
-    if(oldHint) oldHint.remove();
-
+  if(hero&&eyesWrap){
+    eyesWrap.querySelector('.ph-eyes-hint')?.remove();
     let nudge=document.getElementById('phEyesNudge');
     if(!nudge){
       nudge=document.createElement('div');
       nudge.className='ph-eyes-nudge';
       nudge.id='phEyesNudge';
       nudge.setAttribute('aria-hidden','true');
-      nudge.innerHTML=`
-        <svg width="46" height="34" viewBox="0 0 46 34" fill="none" aria-hidden="true">
-          <path d="M43 4C34 6 21 9 12 16C7 20 5 24 6 29" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M2 22C3 25 4 28 6 30" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M11 27C9 29 7 30 5 30" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        <span>psst, click these</span>
-      `;
+      nudge.innerHTML='<svg width="46" height="34" viewBox="0 0 46 34" fill="none" aria-hidden="true"><path d="M43 4C34 6 21 9 12 16C7 20 5 24 6 29" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2 22C3 25 4 28 6 30" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M11 27C9 29 7 30 5 30" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>psst, click me</span>';
       eyesWrap.insertAdjacentElement('afterend',nudge);
+    }else{
+      const label=nudge.querySelector('span');
+      if(label)label.textContent='psst, click me';
     }
 
     const actions=document.getElementById('phActions');
     if(actions){
       Array.from(actions.querySelectorAll('.ph-action')).forEach(link=>{
         const href=link.getAttribute('href');
-        if(href!=='#work' && href!=='resume.html') link.remove();
+        if(href!=='#work'&&href!=='resume.html')link.remove();
       });
-
-      if(actions.classList.contains('show')) nudge.classList.add('show');
+      if(actions.classList.contains('show'))nudge.classList.add('show');
       else{
-        const actionsObserver=new MutationObserver(()=>{
+        const observer=new MutationObserver(()=>{
           if(actions.classList.contains('show')){
             nudge.classList.add('show');
-            actionsObserver.disconnect();
+            observer.disconnect();
           }
         });
-        actionsObserver.observe(actions,{attributes:true,attributeFilter:['class']});
+        observer.observe(actions,{attributes:true,attributeFilter:['class']});
       }
     }
   }
 
   const nav=document.getElementById('snNav');
-
   if(nav){
     if(hero){
-      const heroObserver=new IntersectionObserver(([entry])=>{
-        nav.classList.toggle('show',!entry.isIntersecting);
-      },{rootMargin:'-80px 0px 0px 0px',threshold:0});
+      const heroObserver=new IntersectionObserver(([entry])=>nav.classList.toggle('show',!entry.isIntersecting),{rootMargin:'-80px 0px 0px 0px',threshold:0});
       heroObserver.observe(hero);
-    }else{
-      nav.classList.add('show');
-    }
+    }else nav.classList.add('show');
 
     const links=Array.from(nav.querySelectorAll('.sn-link[data-section]'));
     const sections=links.map(link=>document.getElementById(link.dataset.section)).filter(Boolean);
-
     if(sections.length){
       const sectionObserver=new IntersectionObserver(entries=>{
-        const visible=entries
-          .filter(entry=>entry.isIntersecting)
-          .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+        const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
         if(!visible)return;
         links.forEach(link=>{
           const active=link.dataset.section===visible.target.id;
