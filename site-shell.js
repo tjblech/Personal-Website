@@ -52,7 +52,8 @@
       link.href=url;link.target='_blank';link.rel='noopener noreferrer';link.innerHTML='view project &#8599;';
       status.replaceWith(link);
     }
-    if(previewUrl&&!content.querySelector('.pw-shot,.pw-shot-live')){
+    if(previewUrl){
+      content.querySelector('.pw-shot,.pw-shot-live')?.remove();
       const tags=content.querySelector('.pw-panel-tags');
       const shot=document.createElement('div');
       shot.className='pw-shot pw-shot-live';
